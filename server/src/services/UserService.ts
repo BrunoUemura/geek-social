@@ -1,6 +1,6 @@
 import { userRepository } from '../repositories/UserRepository';
 import { StatusCodes } from 'http-status-codes';
-import { UserUpdate } from '../config/interfaces/userInterface';
+import { IUserUpdate } from '../interfaces/userInterface';
 
 export class UserService {
   async findAll() {
@@ -11,19 +11,20 @@ export class UserService {
     return await userRepository.findById(id);
   }
 
-  // async update(id: string, { username, password }: UserUpdate) {
-  //   await userRepository.update({
-  //     where: { id: id },
-  //     data: {
-  //       username,
-  //     },
-  //   });
+  async update(
+    id: string,
+    { profilePicture, coverPicture, description }: IUserUpdate,
+  ) {
+    await userRepository.updateOne(
+      { _id: id },
+      { profilePicture, coverPicture, description },
+    );
 
-  //   return {
-  //     status: StatusCodes.OK,
-  //     message: 'User updated successfully',
-  //   };
-  // }
+    return {
+      status: StatusCodes.OK,
+      message: 'User updated successfully',
+    };
+  }
 
   async delete(id: string) {
     await userRepository.deleteOne({ _id: id });

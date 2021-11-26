@@ -49,17 +49,17 @@ export class ListController {
     }
   }
 
-  // static async update(req: Request, res: Response, next: NextFunction) {
-  //   try {
-  //     const { id } = req.params;
-  //     const { listName, category } = req.body;
-  //     const service = new ListService();
-  //     const result = await service.update(id, { listName, category });
-  //     return res.json(result);
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // }
+  static async update(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const { listName, category } = req.body;
+      const service = new ListService();
+      const result = await service.update(id, { listName, category });
+      return res.json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
 
   static async delete(req: Request, res: Response, next: NextFunction) {
     try {

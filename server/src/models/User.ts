@@ -40,6 +40,7 @@ const UserSchema = new mongoose.Schema<IUser>(
     },
     description: {
       type: String,
+      default: '',
       max: 50,
     },
   },

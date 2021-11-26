@@ -5,10 +5,10 @@ import { StatusCodes } from 'http-status-codes';
 import { UnauthorizedError } from '../errors/UnauthorizedError';
 import { NotFoundError } from '../errors/NotFoundError';
 import { BadRequestError } from '../errors/BadRequestError';
-import { UserRegister, UserLogin } from '../config/interfaces/authInterface';
+import { IUserRegister, IUserLogin } from '../interfaces/authInterface';
 
 export class AuthService {
-  async registerUser({ username, email, password }: UserRegister) {
+  async registerUser({ username, email, password }: IUserRegister) {
     const userExist = await userRepository.findOne({ email });
 
     if (userExist) {
@@ -37,7 +37,7 @@ export class AuthService {
     };
   }
 
-  async loginUser({ email, password }: UserLogin) {
+  async loginUser({ email, password }: IUserLogin) {
     const user = await userRepository.findOne({ email });
 
     if (!user) {

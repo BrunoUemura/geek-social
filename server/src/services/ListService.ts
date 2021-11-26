@@ -1,6 +1,7 @@
 import { listRepository } from '../repositories/ListRepository';
 import { StatusCodes } from 'http-status-codes';
-import { UserUpdate } from '../config/interfaces/userInterface';
+import { IUserUpdate } from '../interfaces/userInterface';
+import { IListCreate, IListUpdate } from '../interfaces/listInterface';
 
 export class ListService {
   async findAll() {
@@ -15,7 +16,7 @@ export class ListService {
     return await listRepository.findById(id);
   }
 
-  async create({ userId, listName, category }: any) {
+  async create({ userId, listName, category }: IListCreate) {
     await listRepository.create({
       userId,
       listName,
@@ -28,27 +29,27 @@ export class ListService {
     };
   }
 
-  // async update(id: string, { listName, category }: any) {
-  //   await listRepository.update({
-  //     where: { id },
-  //     data: {
-  //       list_name: listName,
-  //       category,
-  //     },
-  //   });
+  async update(id: string, { listName, category }: IListUpdate) {
+    await listRepository.updateOne(
+      { _id: id },
+      {
+        listName,
+        category,
+      },
+    );
 
-  //   return {
-  //     status: StatusCodes.OK,
-  //     message: 'User updated successfully',
-  //   };
-  // }
+    return {
+      status: StatusCodes.OK,
+      message: 'List updated successfully',
+    };
+  }
 
   async delete(id: string) {
     await listRepository.deleteOne({ _id: id });
 
     return {
       status: StatusCodes.OK,
-      message: 'User deleted successfully',
+      message: 'List deleted successfully',
     };
   }
 }
