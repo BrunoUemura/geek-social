@@ -23,14 +23,6 @@ export class AuthService {
       password: hashedPassword,
     });
 
-    // await userRepository.create({
-    //   data: {
-    //     username,
-    //     email,
-    //     password: hashedPassword,
-    //   },
-    // });
-
     return {
       status: StatusCodes.CREATED,
       message: 'User registered successfully',
