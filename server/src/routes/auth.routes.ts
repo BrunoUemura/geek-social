@@ -11,12 +11,10 @@ const registrationValidation = [
 ];
 
 const loginValidation = [
-  body('email').isEmail().withMessage('Email must be valid'),
+  body('username').notEmpty(),
+  body('password').trim().isLength({ min: 4, max: 20 }),
 ];
-
-const logoutValidation = [body('token').isString()];
 
 auth
   .post('/register', registrationValidation, AuthController.registerUser)
   .post('/login', loginValidation, AuthController.loginUser);
-// .post('/auth/logout', logoutValidation, AuthController.logoutUser);

@@ -33,31 +33,13 @@ export class AuthController {
         throw new RequestValidationError(errors.array());
       }
 
-      const { email, password } = req.body;
+      const { username, password } = req.body;
       const authService = new AuthService();
-      const user = await authService.loginUser({ email, password });
+      const user = await authService.loginUser({ username, password });
 
       return res.json(user);
     } catch (error) {
       next(error);
     }
   }
-
-  // static async logoutUser(req: Request, res: Response, next: NextFunction) {
-  //   try {
-  //     const errors = validationResult(req);
-
-  //     if (!errors.isEmpty()) {
-  //       throw new RequestValidationError(errors.array());
-  //     }
-
-  //     const { token } = req.body;
-  //     const authService = new AuthService();
-
-  //     const result = await authService.logoutUser(token);
-  //     return res.json(result);
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // }
 }

@@ -8,13 +8,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "axios": "^0.24.0",
+    "jsonwebtoken": "^8.5.1",
     "next": "12.0.4",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-icons": "^4.3.1",
-    "sass": "^1.43.5"
+    "sass": "^1.45.0"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^8.5.6",
     "@types/node": "16.11.10",
     "@types/react": "17.0.37",
     "eslint": "7",
