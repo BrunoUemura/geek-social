@@ -1,0 +1,87 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--primary-dark);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  min-width: 60%;
+  height: 100%;
+}
+
+.contentHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  border-radius: 10px;
+  background-color: var(--secondary-dark);
+
+  .profileImage {
+    width: 120px;
+    border-radius: 50%;
+  }
+
+  h1,
+  h4 {
+    color: var(--text-light);
+  }
+
+  h4 {
+    margin-top: 20px;
+  }
+}
+
+.options {
+  border-radius: 10px;
+  background-color: var(--secondary-dark);
+
+  min-height: 40px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+
+  .optionsButton {
+    background-color: transparent;
+    color: var(--text-light);
+
+    font-size: large;
+    cursor: pointer;
+    padding: 0 20px;
+    border: 0;
+    border-bottom: 3px solid transparent;
+
+    &:hover {
+      border-bottom: 3px solid var(--button-blue);
+    }
+  }
+}
+
+.contentSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px;
+  margin-top: 20px;
+
+  border-radius: 10px;
+  color: var(--text-light);
+  background-color: var(--secondary-dark);
+
+  .newButton {
+    background-color: var(--button-blue);
+  }
+}

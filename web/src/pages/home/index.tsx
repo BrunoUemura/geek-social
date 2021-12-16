@@ -3,18 +3,17 @@ import { AuthContext } from "../../context/AuthContext";
 import styles from "./styles.module.scss";
 import TopBar from "../../components/Topbar";
 import { GetServerSideProps } from "next";
-import Navbar from "../../components/Navbar";
 
 const HomePage = () => {
   const { user } = useContext(AuthContext);
 
   return (
-    <>
+    <div className={styles.container}>
       <TopBar />
-      <div className={styles.container}>
+      <div className={styles.content}>
         <h1>{user?.username}</h1>
       </div>
-    </>
+    </div>
   );
 };
 
