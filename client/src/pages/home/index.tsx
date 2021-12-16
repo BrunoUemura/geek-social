@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import styles from "./styles.module.scss";
 import TopBar from "../../components/Topbar";
 import { GetServerSideProps } from "next";
 import Navbar from "../../components/Navbar";
@@ -10,8 +9,8 @@ const HomePage = () => {
 
   return (
     <>
-      <TopBar />
-      <div className={styles.container}>
+      <Navbar />
+      <div className="w-full h-full flex justify-center items-center">
         <h1>{user?.username}</h1>
       </div>
     </>

@@ -1,32 +1,89 @@
-import React from "react";
+import router from "next/router";
+import React, { useState } from "react";
+import { Authentication } from "../../services/Authentication";
+import styles from "./styles.module.scss";
 
 const Register = () => {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const validateFields = () => {
+    if (
+      username === "" ||
+      email === "" ||
+      password === "" ||
+      confirmPassword === ""
+    ) {
+      throw new Error("All fields are required");
+    }
+
+    if (password !== confirmPassword) {
+      throw new Error("Entered password do not match");
+    }
+  };
+
+  const handleSignUp = async () => {
+    try {
+      validateFields();
+      const authentication = new Authentication();
+      const { status }: any = await authentication.register(
+        username,
+        email,
+        password
+      );
+      if (status == 200) {
+        console.log("registered");
+        router.push("/login");
+      }
+    } catch (error) {
+      alert("Registration failed");
+    }
+  };
+
   return (
-    <div className="w-screen h-screen flex justify-center items-center bg-gray-900">
-      <div className="w-1/3 h-1/2 bg-gray-800 flex flex-col justify-around items-center">
-        <h1 className="text-white text-3xl uppercase">Sign Up</h1>
+    <div className={styles.container}>
+      <div className={styles.content}>
+        <h1 className={styles.title}>Sign Up</h1>
         <input
-          className="w-2/3 h-10 rounded-sm flex pl-2 bg-gray-700"
+          className={styles.input}
           type="text"
-          placeholder="username"
+          placeholder="Username"
+          onChange={(event) => {
+            setUsername(event.target.value);
+          }}
         />
         <input
-          className="w-2/3 h-10 rounded-sm flex pl-2 bg-gray-700"
+          className={styles.input}
           type="text"
-          placeholder="password"
+          placeholder="Email"
+          onChange={(event) => {
+            setEmail(event.target.value);
+          }}
         />
-        <button
-          className="w-2/3 h-10 rounded-sm cursor-pointer text-white bg-gray-700"
-          type="submit"
-        >
+        <input
+          className={styles.input}
+          type="password"
+          placeholder="Password"
+          onChange={(event) => {
+            setPassword(event.target.value);
+          }}
+        />
+        <input
+          className={styles.input}
+          type="password"
+          placeholder="Confirm Password"
+          onChange={(event) => {
+            setConfirmPassword(event.target.value);
+          }}
+        />
+        <button className={styles.button} type="submit" onClick={handleSignUp}>
           Sign Up
         </button>
-        <span className="text-white">
+        <span className={styles.span}>
           Already registered?{" "}
-          <a
-            href="/login"
-            className="text-blue-600 hover:underline hover:underline-offset-1"
-          >
+          <a href="/login" className={styles.anchorTag}>
             Sign In
           </a>
         </span>

@@ -1,21 +1,9 @@
-import { useState } from "react";
 import type { NextPage } from "next";
-import Link from "next/Link";
 import Head from "next/head";
 import styles from "../styles/home.module.scss";
-import TopBar from "../components/Topbar";
-import Login from "./login";
-import { AuthContext } from "../context/AuthContext";
 import HomePage from "./home";
 
-type IUser = {
-  username: string;
-  password: string;
-};
-
 const Home: NextPage = () => {
-  const [user, setUser] = useState<IUser>();
-
   return (
     <div className={styles.container}>
       <Head>
@@ -24,15 +12,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <AuthContext.Provider value={{ user, setUser }}>
-        {user ? (
-          <HomePage />
-        ) : (
-          <Link href="/login" passHref>
-            <Login />
-          </Link>
-        )}
-      </AuthContext.Provider>
+      <HomePage />
     </div>
   );
 };

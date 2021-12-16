@@ -51,6 +51,7 @@ export class AuthService {
       status: StatusCodes.OK,
       message: 'Authentication Successful',
       token,
+      user,
     };
   }
 }
