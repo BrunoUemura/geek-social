@@ -1,6 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import { profile } from "console";
-import { useEffect, useState } from "react";
+import router from "next/router";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
 import { Users } from "../../services/Users";
 import styles from "./styles.module.scss";
 
@@ -31,21 +33,43 @@ type IUser = {
 };
 
 export default function Post({ post }: Props) {
-  const [user, setUser] = useState<IUser>();
+  const { user } = useContext(AuthContext);
+  const [postedBy, setPostedBy] = useState<IUser>();
 
   useEffect(() => {
     (async () => {
       const result = await Users.findAllById(post.userId);
-      setUser(result);
+      setPostedBy(result);
     })();
   }, []);
+
+  const handleProfileRedirect = (id: string) => {
+    if (id === user._id) {
+      router.push(`profile`);
+    } else {
+      router.push(`profile/${id}`);
+    }
+  };
 
   return (
     <div className={styles.container}>
       <div className={styles.postHeader}>
-        <img src={user?.profilePicture} alt={user?.username} />
+        <img
+          src={postedBy?.profilePicture}
+          alt={postedBy?.username}
+          onClick={() => {
+            handleProfileRedirect(post?.userId);
+          }}
+        />
         <div>
-          <h2 className={styles.username}>@{user?.username}</h2>
+          <h2
+            className={styles.username}
+            onClick={() => {
+              handleProfileRedirect(post.userId);
+            }}
+          >
+            @{postedBy?.username}
+          </h2>
           <p className={styles.date}>{post.createdAt}</p>
         </div>
       </div>
@@ -53,9 +77,12 @@ export default function Post({ post }: Props) {
       <div className={styles.postContent}>
         <h3 className={styles.title}>{post?.title}</h3>
         <p className={styles.description}>{post?.description}</p>
+
         <div className={styles.image}>
           <img src={post?.image} alt={post?.image} />
         </div>
+
+        <span className={styles.likes}>❤ {post?.likes.length}</span>
       </div>
     </div>
   );

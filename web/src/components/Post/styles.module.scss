@@ -23,11 +23,15 @@
   img {
     max-width: 70px;
     border-radius: 50%;
+    cursor: pointer;
   }
 
   .username,
   .date {
     margin-left: 20px;
+  }
+  .username {
+    cursor: pointer;
   }
   .date {
     color: var(--text-light-two);
@@ -41,6 +45,13 @@
 
   padding: 10px;
 
+  .title {
+  }
+  .description {
+    margin-top: 10px;
+    color: var(--text-light-two);
+  }
+
   .image {
     display: flex;
     justify-content: center;
@@ -52,10 +63,8 @@
       max-width: 80%;
     }
   }
-  .title {
-  }
-  .description {
-    margin-top: 10px;
-    color: var(--text-light-two);
+
+  .likes {
+    cursor: pointer;
   }
 }

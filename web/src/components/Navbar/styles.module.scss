@@ -47,7 +47,7 @@
   }
 }
 
-.loginButton {
+.signInButton {
   margin-right: 10px;
   color: var(--text-light);
   background-color: var(--button-blue);
@@ -55,7 +55,7 @@
   border: 2px solid var(--button-blue);
 }
 
-.RegisterButton {
+.signUpButton {
   color: var(--button-blue);
   background-color: transparent;
 
@@ -65,4 +65,13 @@
     color: var(--text-light);
     background-color: var(--button-blue);
   }
+}
+
+.signOutButton {
+  cursor: pointer;
+  margin-right: 10px;
+  color: var(--text-light);
+  background-color: var(--button-blue);
+
+  border: 2px solid var(--button-blue);
 }

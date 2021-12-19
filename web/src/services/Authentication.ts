@@ -1,7 +1,15 @@
-import axios from "axios";
-import { type } from "os";
-import { IUserType } from "../utils/UserType";
 import { api } from "./api";
+
+type IUserType = {
+  _id: string;
+  username: string;
+  email: string;
+  profilePicture: string;
+  coverPicture: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+};
 
 type ILoginResult = {
   status: number;
