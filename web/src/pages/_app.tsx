@@ -1,5 +1,6 @@
-import "../styles/globals.scss";
 import type { AppProps } from "next/app";
+
+import "../styles/globals.scss";
 import { AuthProvider } from "../context/AuthContext";
 
 function MyApp({ Component, pageProps }: AppProps) {

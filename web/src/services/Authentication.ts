@@ -1,5 +1,13 @@
 import axios from "axios";
+import { type } from "os";
+import { IUserType } from "../utils/UserType";
 import { api } from "./api";
+
+type ILoginResult = {
+  status: number;
+  token: string;
+  user: IUserType;
+};
 
 export class Authentication {
   static async register(username: string, email: string, password: string) {
@@ -16,7 +24,10 @@ export class Authentication {
     }
   }
 
-  static async login(username: string, password: string) {
+  static async login(
+    username: string,
+    password: string
+  ): Promise<ILoginResult> {
     try {
       const { data } = await api.post("/login", {
         username,

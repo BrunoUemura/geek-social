@@ -1,9 +1,17 @@
-import { listRepository } from '../repositories/ListRepository';
 import { StatusCodes } from 'http-status-codes';
+
+import { listRepository } from '../repositories/ListRepository';
 import { IListItemCreate, IListItemUpdate } from '../interfaces/listInterface';
+import { NotFoundError } from '../errors/NotFoundError';
 
 export class ListItemService {
   async create(id: string, { title, season, episode }: IListItemCreate) {
+    const listExists = await listRepository.findById(id);
+
+    if (!listExists) {
+      throw new NotFoundError('List not found');
+    }
+
     await listRepository.findByIdAndUpdate(
       { _id: id },
       {
@@ -27,6 +35,12 @@ export class ListItemService {
     id: string,
     { itemId, title, season, episode }: IListItemUpdate,
   ) {
+    const listExists = await listRepository.findById(id);
+
+    if (!listExists) {
+      throw new NotFoundError('List not found');
+    }
+
     await listRepository.findByIdAndUpdate(
       { _id: id, 'listItems._id': itemId },
       {
@@ -47,6 +61,12 @@ export class ListItemService {
   }
 
   async delete(id: string, itemId: string) {
+    const listExists = await listRepository.findById(id);
+
+    if (!listExists) {
+      throw new NotFoundError('List not found');
+    }
+
     await listRepository.findByIdAndUpdate(
       { _id: id },
       {

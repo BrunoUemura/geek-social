@@ -1,19 +1,27 @@
 /* eslint-disable @next/next/no-img-element */
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import router from "next/router";
 import Link from "next/link";
 
 import Button from "../../components/Button";
-import TopBar from "../../components/Topbar";
+import Navbar from "../../components/Navbar";
 import { AuthContext } from "../../context/AuthContext";
 import styles from "./styles.module.scss";
 
-const Profile = () => {
-  const { user } = useContext(AuthContext);
-  const [renderPosts, setRenderPosts] = useState(false);
+export default function Profile() {
+  const { user, isAuthenticated } = useContext(AuthContext);
+  const [renderPosts, setRenderPosts] = useState(true);
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      alert("You need to Sign In to access your profile");
+      router.push("/");
+    }
+  }, [isAuthenticated]);
 
   return (
     <div className={styles.container}>
-      <TopBar />
+      <Navbar />
       <div className={styles.content}>
         <div className={styles.contentHeader}>
           <img
@@ -51,28 +59,14 @@ const Profile = () => {
           {renderPosts ? (
             <div>
               <Link href="/posts/new" passHref>
-                <Button
-                  text="+ New"
-                  fontSize="larger"
-                  textColor="var(--text-light)"
-                  background="var(--button-blue)"
-                  width="100px"
-                  heigth="30px"
-                />
+                <button className={styles.newButton}>+ New</button>
               </Link>
               <h1>Posts components</h1>
             </div>
           ) : (
             <div>
               <Link href="/playlists/new" passHref>
-                <Button
-                  text="+ New"
-                  fontSize="larger"
-                  textColor="var(--text-light)"
-                  background="var(--button-blue)"
-                  width="100px"
-                  heigth="30px"
-                />
+                <button className={styles.newButton}>+ New</button>
               </Link>
               <h1>Playlists components</h1>
             </div>
@@ -81,6 +75,4 @@ const Profile = () => {
       </div>
     </div>
   );
-};
-
-export default Profile;
+}

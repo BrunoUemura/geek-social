@@ -1,5 +1,6 @@
 import router from "next/router";
 import React, { useState } from "react";
+
 import { Authentication } from "../../services/Authentication";
 import styles from "./styles.module.scss";
 
@@ -27,8 +28,7 @@ const Register = () => {
   const handleSignUp = async () => {
     try {
       validateFields();
-      const authentication = new Authentication();
-      const { status }: any = await authentication.register(
+      const { status }: any = await Authentication.register(
         username,
         email,
         password

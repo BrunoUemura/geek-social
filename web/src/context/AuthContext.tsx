@@ -1,7 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import Router from "next/router";
 import { setCookie, parseCookies } from "nookies";
-import { decode } from "jsonwebtoken";
 
 import { Authentication } from "../services/Authentication";
 import { Users } from "../services/Users";
@@ -49,15 +48,15 @@ export function AuthProvider({ children }: any) {
   }, []);
 
   async function signIn({ username, password }: ISignInData) {
-    const { token, user } = await Authentication.login(username, password);
+    const data = await Authentication.login(username, password);
 
-    setCookie(undefined, "geek.token", token, {
+    setCookie(undefined, "geek.token", data?.token, {
       maxAge: 60 * 60 * 1, // 1 hour
     });
 
-    api.defaults.headers["Authorization"] = `Bearer ${token}`;
+    api.defaults.headers["Authorization"] = `Bearer ${data?.token}`;
 
-    setUser(user);
+    setUser(data?.user);
 
     Router.push("/");
   }

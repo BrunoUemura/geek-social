@@ -1,17 +1,40 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { GetServerSideProps } from "next";
+
 import { AuthContext } from "../../context/AuthContext";
 import styles from "./styles.module.scss";
-import TopBar from "../../components/Topbar";
-import { GetServerSideProps } from "next";
+import Navbar from "../../components/Navbar";
+import { Posts } from "../../services/Posts";
+import Post from "../../components/Post";
+
+type IPosts = {
+  _id: string;
+  userId: string;
+  description: string;
+  image: string;
+  likes: string[];
+  createdAt: string;
+  updatedAt: string;
+};
 
 const HomePage = () => {
   const { user } = useContext(AuthContext);
+  const [posts, setPosts] = useState<IPosts[]>();
+
+  useEffect(() => {
+    (async () => {
+      const result = await Posts.findAll();
+      setPosts(result);
+    })();
+  }, []);
 
   return (
     <div className={styles.container}>
-      <TopBar />
+      <Navbar />
       <div className={styles.content}>
-        <h1>{user?.username}</h1>
+        {posts?.map((post, index) => (
+          <Post key={index} post={post} />
+        ))}
       </div>
     </div>
   );

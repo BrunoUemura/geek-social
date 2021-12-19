@@ -1,16 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import router from "next/router";
-// import { AuthContent, useAuthContext } from "../../context/AuthContext";
-import styles from "./styles.module.scss";
-import { Authentication } from "../../services/Authentication";
 import { useForm } from "react-hook-form";
+
+import styles from "./styles.module.scss";
 import { AuthContext } from "../../context/AuthContext";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const { signIn } = useContext(AuthContext);
 
-  // const { user, setUser }: AuthContent = useAuthContext();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 

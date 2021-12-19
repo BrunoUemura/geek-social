@@ -1,6 +1,9 @@
 .container {
   width: 100vw;
   height: 100vh;
+
+  margin-top: 50px;
+
   background-color: var(--primary-dark);
   display: flex;
   flex-direction: column;
@@ -26,6 +29,8 @@
   border-radius: 10px;
   background-color: var(--secondary-dark);
 
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
   .profileImage {
     width: 120px;
     border-radius: 50%;
@@ -44,6 +49,8 @@
 .options {
   border-radius: 10px;
   background-color: var(--secondary-dark);
+
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
   min-height: 40px;
 
@@ -81,7 +88,18 @@
   color: var(--text-light);
   background-color: var(--secondary-dark);
 
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
   .newButton {
+    width: 100px;
+    height: 30px;
+
+    border: 0px;
+    border-radius: 5px;
+
+    color: var(--text-light);
     background-color: var(--button-blue);
+    font-size: larger;
+    cursor: pointer;
   }
 }

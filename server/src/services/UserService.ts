@@ -1,6 +1,8 @@
-import { userRepository } from '../repositories/UserRepository';
 import { StatusCodes } from 'http-status-codes';
+
+import { userRepository } from '../repositories/UserRepository';
 import { IUserUpdate } from '../interfaces/userInterface';
+import { NotFoundError } from '../errors/NotFoundError';
 
 export class UserService {
   async findAll() {
@@ -15,9 +17,18 @@ export class UserService {
     id: string,
     { profilePicture, coverPicture, description }: IUserUpdate,
   ) {
-    await userRepository.updateOne(
+    const userExists = await userRepository.findById(id);
+
+    if (!userExists) {
+      throw new NotFoundError('User not found');
+    }
+
+    await userRepository.findOneAndUpdate(
       { _id: id },
       { profilePicture, coverPicture, description },
+      {
+        new: true,
+      },
     );
 
     return {
@@ -27,6 +38,12 @@ export class UserService {
   }
 
   async delete(id: string) {
+    const userExists = await userRepository.findById(id);
+
+    if (!userExists) {
+      throw new NotFoundError('User not found');
+    }
+
     await userRepository.deleteOne({ _id: id });
 
     return {

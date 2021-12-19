@@ -1,11 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import { useContext } from "react";
 import Link from "next/Link";
+
 import styles from "./styles.module.scss";
 import { AuthContext } from "../../context/AuthContext";
 import Button from "../Button";
 
-const TopBar = () => {
+const Navbar = () => {
   const { user } = useContext(AuthContext);
 
   const handleProfileMenuClick = () => {
@@ -44,4 +45,4 @@ const TopBar = () => {
   );
 };
 
-export default TopBar;
+export default Navbar;
